@@ -1,0 +1,93 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+<div class="row">
+    <div  style="text-align:left;float:left;">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <div class="col-md-5" style="text-align:left;float:left;" >
+                <h2>Create a new account</h2>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-floating">
+                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                <label asp-for="Input.Email"></label>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
+                <label asp-for="Input.Password"></label>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
+                <label asp-for="Input.ConfirmPassword"></label>
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <h1></h1>
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+            </div>
+
+            <div class="col-md-5 col-md-offset-2" style="text-align:left;float:left;" >
+            <section>
+            
+            <h2 class="text-white" color=white;> d  </h2>
+            <hr />
+            
+            <div class="form-floating">
+                <input asp-for="Input.FirstName" class="form-control"  aria-required="true" />
+                <label asp-for="Input.FirstName"></label>
+                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Input.LastName" class="form-control"  aria-required="true" />
+                <label asp-for="Input.LastName"></label>
+                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Input.AddressStreet" class="form-control"  aria-required="true" />
+                <label asp-for="Input.AddressStreet"></label>
+                <span asp-validation-for="Input.AddressStreet" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Input.AddressCity" class="form-control"  aria-required="true" />
+                <label asp-for="Input.AddressCity"></label>
+                <span asp-validation-for="Input.AddressCity" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Input.AddressZip" class="form-control"  aria-required="true" />
+                <label asp-for="Input.AddressZip"></label>
+                <span asp-validation-for="Input.AddressZip" class="text-danger"></span>
+            </div>
+            <p></p>
+            <h4>Work Information</h4>
+            
+            <div class="form-floating">
+                <input asp-for="Input.WorkStreet" class="form-control"  aria-required="true" />
+                <label asp-for="Input.WorkStreet"></label>
+                <span asp-validation-for="Input.WorkStreet" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Input.WorkCity" class="form-control"  aria-required="true" />
+                <label asp-for="Input.WorkCity"></label>
+                <span asp-validation-for="Input.WorkCity" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Input.WorkZip" class="form-control"  aria-required="true" />
+                <label asp-for="Input.WorkZip"></label>
+                <span asp-validation-for="Input.WorkZip" class="text-danger"></span>
+            </div>
+            </section>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

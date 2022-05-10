@@ -20,26 +20,36 @@ namespace MWayV2.Controllers
         public async Task<ActionResult> Index()
         {
             ClaimsPrincipal currentUser = this.User;
-            var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+            string test = Convert.ToString(currentUser);
+            if (currentUser.Identity.Name != null)
+            {
 
-            var budGroupCar = "Car";
-            var dataCar = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupCar).Sum(x => x.BudgetItemCost);
+
+                var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+                var budGroupCar = "Car";
+                var dataCar = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupCar).Sum(x => x.BudgetItemCost);
+
+
+                var budGroupHome = "Home";
+                var dataHome = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupHome).Sum(x => x.BudgetItemCost);
+
+
+                var budGroupElectronics = "Electronics";
+                var dataElect = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupElectronics).Sum(x => x.BudgetItemCost);
+
+
+                var budGroupOther = "Other";
+                var dataOther = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupOther).Sum(x => x.BudgetItemCost);
+
+                return View(dataCar);
+            }
+            else
+            {
+                return Redirect("Identity/Account/Register");
+            }
             
-
-            var budGroupHome = "Home";
-            var dataHome = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupHome).Sum(x => x.BudgetItemCost);
-            
-
-            var budGroupElectronics = "Electronics";
-            var dataElect = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupElectronics).Sum(x => x.BudgetItemCost);
-            
-
-            var budGroupOther = "Other";
-            var dataOther = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupOther).Sum(x => x.BudgetItemCost);
-
-            return View(dataCar);
         }
-
         public ActionResult GetData()
         {
             ClaimsPrincipal currentUser = this.User;
@@ -80,4 +90,4 @@ namespace MWayV2.Controllers
         }
 
     }
-}
+    }

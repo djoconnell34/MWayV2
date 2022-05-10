@@ -4,6 +4,7 @@ using MWayV2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MWayV2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220509150226_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -241,9 +243,6 @@ namespace MWayV2.Migrations
                     b.Property<string>("WorkZip")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("user11")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -266,31 +265,24 @@ namespace MWayV2.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BudgetItemID"), 1L, 1);
 
                     b.Property<string>("BudgetGroup")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("BudgetGroupId")
+                    b.Property<int>("BudgetGroupId")
                         .HasColumnType("int");
 
-                    b.Property<double?>("BudgetItemCost")
-                        .IsRequired()
+                    b.Property<double>("BudgetItemCost")
                         .HasColumnType("float");
 
                     b.Property<string>("BudgetItemName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("IdHolder")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("MonthlyYearly")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("BudgetItemID");
-
-                    b.HasIndex("Id");
 
                     b.ToTable("budgets", "Identity");
                 });
@@ -344,20 +336,6 @@ namespace MWayV2.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("MWayV2.Models.Budget", b =>
-                {
-                    b.HasOne("MWayV2.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("budgets")
-                        .HasForeignKey("Id");
-
-                    b.Navigation("ApplicationUser");
-                });
-
-            modelBuilder.Entity("MWayV2.Models.ApplicationUser", b =>
-                {
-                    b.Navigation("budgets");
                 });
 #pragma warning restore 612, 618
         }

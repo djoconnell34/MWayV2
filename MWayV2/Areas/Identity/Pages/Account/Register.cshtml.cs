@@ -116,7 +116,7 @@ namespace MWayV2.Areas.Identity.Pages.Account
             public string WorkCity { get; set; }
             [Display(Name = "Work Zip Code")]
             public string WorkZip { get; set; }
-
+            
 
         }
 
@@ -137,9 +137,9 @@ namespace MWayV2.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-                MailAddress address = new MailAddress(Input.Email); //have to add the following three lines to connect username and inital email
-                string userName = address.User;
-                user.UserName = userName;
+                //MailAddress address = new MailAddress(Input.Email); //have to add the following three lines to connect username and inital email
+                //string userName = address.User;
+                //user.UserName = userName;
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
                 user.AddressStreet = Input.AddressStreet;
@@ -149,8 +149,8 @@ namespace MWayV2.Areas.Identity.Pages.Account
                 user.WorkCity = Input.WorkCity;
                 user.WorkZip = Input.WorkZip;
                 var result = await _userManager.CreateAsync(user, Input.Password);
-
-
+                
+                
 
 
                 if (result.Succeeded)

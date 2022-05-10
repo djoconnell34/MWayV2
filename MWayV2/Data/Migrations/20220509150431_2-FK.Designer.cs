@@ -4,6 +4,7 @@ using MWayV2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MWayV2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220509150431_2-FK")]
+    partial class _2FK
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -241,9 +243,6 @@ namespace MWayV2.Migrations
                     b.Property<string>("WorkZip")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("user11")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -266,13 +265,13 @@ namespace MWayV2.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BudgetItemID"), 1L, 1);
 
                     b.Property<string>("BudgetGroup")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("BudgetGroupId")
+                    b.Property<int>("BudgetGroupId")
                         .HasColumnType("int");
 
-                    b.Property<double?>("BudgetItemCost")
-                        .IsRequired()
+                    b.Property<double>("BudgetItemCost")
                         .HasColumnType("float");
 
                     b.Property<string>("BudgetItemName")
@@ -282,10 +281,8 @@ namespace MWayV2.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("IdHolder")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("MonthlyYearly")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("BudgetItemID");

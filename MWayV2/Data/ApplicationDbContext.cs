@@ -45,5 +45,7 @@ namespace MWayV2.Data
                 entity.ToTable("UserTokens");
             });
         }
+
+        public DbSet<Budget> budgets { get; set; }
     }
 }

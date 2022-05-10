@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MWayV2.Models
 {
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUser : IdentityUser 
     {
         public string FirstName { get; set; } = "";
 
@@ -21,5 +22,15 @@ namespace MWayV2.Models
         public string? WorkZip { get; set; }
 
         public byte[]? ProfilePicture { get; set; }
+
+        public string? user11 { get; set; }
+
+        [InverseProperty("ApplicationUser")]
+        public virtual ICollection<Budget> budgets { get; set; }
+
+        public static implicit operator ApplicationUser(string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

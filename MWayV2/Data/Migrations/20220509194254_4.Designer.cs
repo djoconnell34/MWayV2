@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace MWayV2.Data.Migrations
+namespace MWayV2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220507231609_2nd")]
-    partial class _2nd
+    [Migration("20220509194254_4")]
+    partial class _4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -243,6 +243,9 @@ namespace MWayV2.Data.Migrations
                     b.Property<string>("WorkZip")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("user11")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -254,6 +257,44 @@ namespace MWayV2.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("User", "Identity");
+                });
+
+            modelBuilder.Entity("MWayV2.Models.Budget", b =>
+                {
+                    b.Property<int>("BudgetItemID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BudgetItemID"), 1L, 1);
+
+                    b.Property<string>("BudgetGroup")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("BudgetGroupId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<double?>("BudgetItemCost")
+                        .IsRequired()
+                        .HasColumnType("float");
+
+                    b.Property<string>("BudgetItemName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("MonthlyYearly")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("BudgetItemID");
+
+                    b.HasIndex("Id");
+
+                    b.ToTable("budgets", "Identity");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -305,6 +346,20 @@ namespace MWayV2.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("MWayV2.Models.Budget", b =>
+                {
+                    b.HasOne("MWayV2.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("budgets")
+                        .HasForeignKey("Id");
+
+                    b.Navigation("ApplicationUser");
+                });
+
+            modelBuilder.Entity("MWayV2.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("budgets");
                 });
 #pragma warning restore 612, 618
         }

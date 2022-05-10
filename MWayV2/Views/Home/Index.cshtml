@@ -2,4 +2,81 @@
     ViewData["Title"] = "Home Page";
 }
 
+<script src="~/js/exporting.js"></script>
+<script src="~/js/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
+<figure class="highcharts-figure">
+    <div id="container"></div>
+    <p class="highcharts-description">
+        Here You can see the break-down of Your Spending
+    </p>
+</figure>
+
+<script>
+
+    $(document).ready(function(){
+
+    $.getJSON("Home/GetData", function(data){
+        
+         Highcharts.chart('container', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Personal Expenses'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    accessibility: {
+        point: {
+            valueSuffix: '%'
+        }
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+            }
+        }
+    },
+    series: [{
+        name: 'Brands',
+        colorByPoint: true,
+        data: [{
+            name: 'Home',
+            y: data.home,
+            sliced: true,
+            selected: true
+        }, {
+            name: 'Car',
+            y: data.car
+        }, {
+            name: 'Electronics',
+            y: data.electron
+        }, {
+            name: 'Other',
+            y: data.other
+        }]
+    }]
+});
+    });
+});
+
+
+
+
+
+   
+
+</script>

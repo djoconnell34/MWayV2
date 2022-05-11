@@ -27,14 +27,15 @@
                 <input asp-for="IncomeMonthlyYearly" class="form-control" />
                 <span asp-validation-for="IncomeMonthlyYearly" class="text-danger"></span>
             </div>
-             <div class="form-group">
+            <div class="form-group">
                 <input type="hidden" asp-for="IdHolder" class="form-control" />
                 <span asp-validation-for="IdHolder" class="text-danger"></span>
             </div>
-            <div class="form-group">
+             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
                 <a asp-action="Index" class="btn btn-primary">Back to List</a>
             </div>
+
         </form>
     </div>
 </div>

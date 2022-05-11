@@ -49,5 +49,6 @@ namespace MWayV2.Data
         public DbSet<Budget> budgets { get; set; }
         public DbSet<ToDo> todo { get; set; }
         public DbSet<Revenue> revenue { get; set; }
+
     }
 }

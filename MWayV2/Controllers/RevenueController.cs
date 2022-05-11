@@ -25,9 +25,16 @@ namespace MWayV2.Controllers
         // GET: Revenue
         public async Task<IActionResult> Index()
         {
-              return _context.revenue != null ? 
-                          View(await _context.revenue.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.revenue'  is null.");
+            ClaimsPrincipal currentUser = this.User;
+            var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            return View(await _context.revenue.Where(x => x.IdHolder == currentUserID).ToListAsync());
+
+
+
+            //return _context.revenue != null ? 
+            //              View(await _context.revenue.ToListAsync()) :
+            //              Problem("Entity set 'ApplicationDbContext.revenue'  is null.");
         }
 
         public async Task<IActionResult> test()
@@ -126,7 +133,7 @@ namespace MWayV2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RevenueId,IncomeName,Income,IncomeMonthlyYearly")] Revenue revenue)
+        public async Task<IActionResult> Edit(int id, [Bind("RevenueId,IncomeName,Income,IncomeMonthlyYearly, IdHolder")] Revenue revenue)
         {
             if (id != revenue.RevenueId)
             {

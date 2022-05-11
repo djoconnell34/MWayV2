@@ -20,7 +20,7 @@ namespace MWayV2.Controllers
         public async Task<ActionResult> Index()
         {
             ClaimsPrincipal currentUser = this.User;
-            string test = Convert.ToString(currentUser);
+            
             if (currentUser.Identity.Name != null)
             {
 
@@ -42,7 +42,7 @@ namespace MWayV2.Controllers
                 var budGroupOther = "Other";
                 var dataOther = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupOther).Sum(x => x.BudgetItemCost);
 
-                return View(dataCar);
+                return View();
             }
             else
             {
@@ -76,11 +76,8 @@ namespace MWayV2.Controllers
             obj.electron = (double)dataElectron;
             obj.other = (double)dataOther;
 
-
-
             return Json(obj);
         }
-
         public class percent
         {
             public double car { get; set; }
@@ -90,20 +87,12 @@ namespace MWayV2.Controllers
         }
 
 
-        public async Task<ActionResult> ToDo()
-        {
-            ToDo toDo = new ToDo();
-            toDo.ToDoName = "test";
-            toDo.ToDoDescription = "test";
-            return View(toDo);
-        }
 
 
 
-        public ActionResult barChart()
-        {
-            return View();
-        }
+
+
+        
 
 
     }

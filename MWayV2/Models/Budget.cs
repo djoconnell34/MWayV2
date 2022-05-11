@@ -23,6 +23,7 @@ namespace MWayV2.Models
 
 
 
+
         [ForeignKey("Id")]
         [InverseProperty("budgets")]
         public virtual ApplicationUser? ApplicationUser { get; set; }

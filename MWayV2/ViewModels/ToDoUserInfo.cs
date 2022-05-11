@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using MWayV2.Models;
 
-namespace MWayV2.Models
+namespace MWayV2.ViewModels
 {
-    public class ApplicationUser : IdentityUser 
+    public class ToDoUserInfo
     {
+
+        public IQueryable<ToDo>? todo { get; set; }
+        public IQueryable<ApplicationUser>? user { get; set; }
+
+
         public string FirstName { get; set; } = "";
 
         public string LastName { get; set; } = "";
@@ -29,12 +33,10 @@ namespace MWayV2.Models
 
         public string? user11 { get; set; }
 
-        [InverseProperty("ApplicationUser")]
-        public virtual ICollection<Budget> budgets { get; set; }
+        public int ToDoId { get; set; }
+        public string ToDoName { get; set; } = "";
+        public string? ToDoDescription { get; set; }
+        public bool ToDoIsComplete { get; set; } = false;
 
-        public static implicit operator ApplicationUser(string v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

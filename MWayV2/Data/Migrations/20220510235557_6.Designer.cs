@@ -4,6 +4,7 @@ using MWayV2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,14 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MWayV2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220510235557_6")]
+    partial class _6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("dbo")
-                .HasAnnotation("ProductVersion", "6.0.5")
+                .HasDefaultSchema("Identity")
+                .HasAnnotation("ProductVersion", "6.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -47,7 +49,7 @@ namespace MWayV2.Migrations
                         .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("Role", "dbo");
+                    b.ToTable("Role", "Identity");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -72,7 +74,7 @@ namespace MWayV2.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("RoleClaims", "dbo");
+                    b.ToTable("RoleClaims", "Identity");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -97,7 +99,7 @@ namespace MWayV2.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserClaims", "dbo");
+                    b.ToTable("UserClaims", "Identity");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -121,7 +123,7 @@ namespace MWayV2.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserLogins", "dbo");
+                    b.ToTable("UserLogins", "Identity");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -136,7 +138,7 @@ namespace MWayV2.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("UserRoles", "dbo");
+                    b.ToTable("UserRoles", "Identity");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -157,7 +159,7 @@ namespace MWayV2.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("UserTokens", "dbo");
+                    b.ToTable("UserTokens", "Identity");
                 });
 
             modelBuilder.Entity("MWayV2.Models.ApplicationUser", b =>
@@ -260,7 +262,7 @@ namespace MWayV2.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("User", "dbo");
+                    b.ToTable("User", "Identity");
                 });
 
             modelBuilder.Entity("MWayV2.Models.Budget", b =>
@@ -298,55 +300,7 @@ namespace MWayV2.Migrations
 
                     b.HasIndex("Id");
 
-                    b.ToTable("budgets", "dbo");
-                });
-
-            modelBuilder.Entity("MWayV2.Models.Revenue", b =>
-                {
-                    b.Property<int>("RevenueId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RevenueId"), 1L, 1);
-
-                    b.Property<string>("IdHolder")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("Income")
-                        .HasColumnType("float");
-
-                    b.Property<string>("IncomeMonthlyYearly")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IncomeName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("RevenueId");
-
-                    b.ToTable("revenue", "dbo");
-                });
-
-            modelBuilder.Entity("MWayV2.Models.ToDo", b =>
-                {
-                    b.Property<int>("ToDoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ToDoId"), 1L, 1);
-
-                    b.Property<string>("ToDoDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("ToDoIsComplete")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ToDoName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ToDoId");
-
-                    b.ToTable("todo", "dbo");
+                    b.ToTable("budgets", "Identity");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

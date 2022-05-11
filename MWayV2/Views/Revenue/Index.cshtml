@@ -1,13 +1,11 @@
-﻿@model IEnumerable<MWayV2.Models.Budget>
+﻿@model IEnumerable<MWayV2.Models.Revenue>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Enter Your Spending Items</h1>
-
- 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>  
+<h1>Add Your Income</h1>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>  
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
@@ -18,10 +16,10 @@
     $("#btnSubmit").click(function(){
         $.ajax({
             type: "POST",
-            url: "/Budgets/AjaxBud",
+            url: "/Revenue/AjaxRev",
             datatype: "json",
-            data: {a: $("#budgetGroup").val(), b: $("#BudgetItem").val(),
-            c: $("#ItemCost").val(), d: $("#TimeGroup").val()},
+            data: {a: $("#IncomeName").val(), b: $("#Income").val(),
+            c: $("#IncomeMonthlyYearly").val()},
             
             success: function(response){
                 alert("Success")
@@ -38,29 +36,25 @@
 
 <form id="form">
     <div class="container">
- 
+
         <table class="table" id="maintable">
             <thead>
                 <tr>
-                    <th>Budget Group</th>
-                    <th>Budget Item</th>
-                    <th>Item Cost</th>
+                    <th>Income Source</th>
+                    <th>Income Amount</th>
                     <th>Payment Time</th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="data-contact-person">
                     <td>
-                        <input type="text" id="budgetGroup" class="form-control budgetGroup0" />
+                        <input type="text" id="IncomeName" class="form-control budgetGroup0" />
                     </td>
                     <td>
-                        <input type="text" id="BudgetItem" class="form-control BudgetItem0" />
+                        <input type="text" id="Income" class="form-control BudgetItem0" />
                     </td>
                     <td>
-                        <input type="text" id="ItemCost" class="form-control ItemCost0" />
-                    </td>
-                    <td>
-                        <input type="text" id="TimeGroup" class="form-control TimeGroup0" />
+                        <input type="text" id="IncomeMonthlyYearly" class="form-control ItemCost0" />
                     </td>
                     <td>
                         <button type="button" id="btnSubmit" class="btn btn-primary btn-md pull-right btn-sm">Sumbit</button>
@@ -71,50 +65,38 @@
     </div>
 </form>
 
-
-
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayName("Budget Group")
+                @Html.DisplayNameFor(model => model.IncomeName)
             </th>
             <th>
-                @Html.DisplayName("Budget Item")
+                @Html.DisplayNameFor(model => model.Income)
             </th>
             <th>
-                @Html.DisplayName("Item Cost")
-            </th>
-            <th>
-                @Html.DisplayName("Payment Time")
+                @Html.DisplayNameFor(model => model.IncomeMonthlyYearly)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-
 @foreach (var item in Model) {
-        //@if(item.IdHolder == )
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.BudgetGroup)
+                @Html.DisplayFor(modelItem => item.IncomeName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.BudgetItemName)
+                $@Html.DisplayFor(modelItem => item.Income)
             </td>
             <td>
-                $@Html.DisplayFor(modelItem => item.BudgetItemCost)
+                @Html.DisplayFor(modelItem => item.IncomeMonthlyYearly)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MonthlyYearly)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.BudgetItemID" class="btn btn-primary btn-sm">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.BudgetItemID" class="deleteContact btn btn-danger btn-sm">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.RevenueId" class="btn btn-primary btn-sm">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.RevenueId" class="deleteContact btn btn-danger btn-sm">Delete</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
-
-

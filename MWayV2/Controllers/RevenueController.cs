@@ -1,5 +1,4 @@
-﻿#nullable disable
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -13,116 +12,123 @@ using MWayV2.Models;
 
 namespace MWayV2.Controllers
 {
-    public class BudgetsController : Controller
+    public class RevenueController : Controller
     {
         SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=zMWayV2;Integrated Security=True");
         private readonly ApplicationDbContext _context;
 
-        public BudgetsController(ApplicationDbContext context)
+        public RevenueController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Budgets
+        // GET: Revenue
         public async Task<IActionResult> Index()
         {
-            ClaimsPrincipal currentUser = this.User;
-            var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
-
-            return View(await _context.budgets.Where(x => x.IdHolder == currentUserID).ToListAsync());
+              return _context.revenue != null ? 
+                          View(await _context.revenue.ToListAsync()) :
+                          Problem("Entity set 'ApplicationDbContext.revenue'  is null.");
         }
 
-        // GET: Budgets/Details/5
+        public async Task<IActionResult> test()
+        {
+            return _context.revenue != null ?
+                        View(await _context.revenue.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.revenue'  is null.");
+        }
+
+        // GET: Revenue/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (id == null || _context.revenue == null)
             {
                 return NotFound();
             }
 
-            var budget = await _context.budgets
-                .FirstOrDefaultAsync(m => m.BudgetItemID == id);
-            if (budget == null)
+            var revenue = await _context.revenue
+                .FirstOrDefaultAsync(m => m.RevenueId == id);
+            if (revenue == null)
             {
                 return NotFound();
             }
 
-            return View(budget);
+            return View(revenue);
         }
 
+
         [HttpPost]
-        public JsonResult AjaxBud(string a, string b, string c, string d, string e)
+        public JsonResult AjaxRev(string a, string b, string c)
         {
             ClaimsPrincipal currentUser = this.User;
             var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            Budget Input = new Budget
+            Revenue Input = new Revenue
             {
-                BudgetGroup = a,
-                BudgetItemName = b,
-                BudgetItemCost = Convert.ToDouble(c),
-                MonthlyYearly = d,
-                IdHolder = currentUserID,
+                IncomeName = a,
+                Income = Convert.ToDouble(b),
+                IncomeMonthlyYearly = c,
+                IdHolder = currentUserID
             };
 
             conn.Open();
-            SqlCommand cmd = new SqlCommand("insert into budgets (BudgetGroup, BudgetItemName, BudgetItemCost, MonthlyYearly, IdHolder ) values ('" + Input.BudgetGroup + "', '" + Input.BudgetItemName + "', '" + Input.BudgetItemCost + "', '" + Input.MonthlyYearly + "', '" + Input.IdHolder + "')", conn);
+            SqlCommand cmd = new SqlCommand("insert into revenue (IncomeName, Income, IncomeMonthlyYearly, IdHolder ) values ('" + Input.IncomeName + "', '" + Input.Income + "', '" + Input.IncomeMonthlyYearly + "', '" + Input.IdHolder + "')", conn);
             cmd.ExecuteNonQuery();
             conn.Close();
             return Json(Input);
         }
 
-        // GET: Budgets/Create
+
+
+
+
+
+
+        // GET: Revenue/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Budgets/Create
+        // POST: Revenue/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BudgetItemID,BudgetGroupId,BudgetGroup,BudgetItemName,BudgetItemCost,MonthlyYearly,IdHolder")] Budget budget)
+        public async Task<IActionResult> Create([Bind("RevenueId,IncomeName,Income,IncomeMonthlyYearly")] Revenue revenue)
         {
-            ClaimsPrincipal currentUser = this.User;
-            var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
-
-            budget.IdHolder = currentUserID;
-
             if (ModelState.IsValid)
             {
-                _context.Add(budget);
+                _context.Add(revenue);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(budget);
+            return View(revenue);
         }
 
-        // GET: Budgets/Edit/5
+        // GET: Revenue/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (id == null || _context.revenue == null)
             {
                 return NotFound();
             }
 
-            var budget = await _context.budgets.FindAsync(id);
-            if (budget == null)
+            var revenue = await _context.revenue.FindAsync(id);
+            if (revenue == null)
             {
                 return NotFound();
             }
-            return View(budget);
+            return View(revenue);
         }
 
-        // POST: Budgets/Edit/5
+        // POST: Revenue/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BudgetItemID,BudgetGroupId,BudgetGroup,BudgetItemName,BudgetItemCost,MonthlyYearly,IdHolder")] Budget budget)
+        public async Task<IActionResult> Edit(int id, [Bind("RevenueId,IncomeName,Income,IncomeMonthlyYearly")] Revenue revenue)
         {
-            if (id != budget.BudgetItemID)
+            if (id != revenue.RevenueId)
             {
                 return NotFound();
             }
@@ -131,12 +137,12 @@ namespace MWayV2.Controllers
             {
                 try
                 {
-                    _context.Update(budget);
+                    _context.Update(revenue);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BudgetExists(budget.BudgetItemID))
+                    if (!RevenueExists(revenue.RevenueId))
                     {
                         return NotFound();
                     }
@@ -147,41 +153,49 @@ namespace MWayV2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(budget);
+            return View(revenue);
         }
 
-        // GET: Budgets/Delete/5
+        // GET: Revenue/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (id == null || _context.revenue == null)
             {
                 return NotFound();
             }
 
-            var budget = await _context.budgets
-                .FirstOrDefaultAsync(m => m.BudgetItemID == id);
-            if (budget == null)
+            var revenue = await _context.revenue
+                .FirstOrDefaultAsync(m => m.RevenueId == id);
+            if (revenue == null)
             {
                 return NotFound();
             }
 
-            return View(budget);
+            return View(revenue);
         }
 
-        // POST: Budgets/Delete/5
+        // POST: Revenue/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var budget = await _context.budgets.FindAsync(id);
-            _context.budgets.Remove(budget);
+            if (_context.revenue == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.revenue'  is null.");
+            }
+            var revenue = await _context.revenue.FindAsync(id);
+            if (revenue != null)
+            {
+                _context.revenue.Remove(revenue);
+            }
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool BudgetExists(int id)
+        private bool RevenueExists(int id)
         {
-            return _context.budgets.Any(e => e.BudgetItemID == id);
+          return (_context.revenue?.Any(e => e.RevenueId == id)).GetValueOrDefault();
         }
     }
 }

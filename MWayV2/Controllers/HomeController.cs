@@ -89,5 +89,22 @@ namespace MWayV2.Controllers
             public double other { get; set; }
         }
 
+
+        public async Task<ActionResult> ToDo()
+        {
+            ToDo toDo = new ToDo();
+            toDo.ToDoName = "test";
+            toDo.ToDoDescription = "test";
+            return View(toDo);
+        }
+
+
+
+        public ActionResult barChart()
+        {
+            return View();
+        }
+
+
     }
-    }
+}

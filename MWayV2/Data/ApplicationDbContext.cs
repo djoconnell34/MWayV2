@@ -15,7 +15,7 @@ namespace MWayV2.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.HasDefaultSchema("Identity");
+            builder.HasDefaultSchema("dbo");
             builder.Entity<ApplicationUser>(entity =>
             {
                 entity.ToTable(name: "User");
@@ -47,5 +47,7 @@ namespace MWayV2.Data
         }
 
         public DbSet<Budget> budgets { get; set; }
+        public DbSet<ToDo> todo { get; set; }
+        public DbSet<Revenue> revenue { get; set; }
     }
 }

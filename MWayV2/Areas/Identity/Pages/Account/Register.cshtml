@@ -1,7 +1,7 @@
 ﻿@page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Welcome, Please Register";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -11,7 +11,7 @@
     <div  style="text-align:left;float:left;">
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <div class="col-md-5" style="text-align:left;float:left;" >
-                <h2>Create a new account</h2>
+               <h4 class="text-white" color=white;> d  </h4>
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-floating">
@@ -36,7 +36,7 @@
             <div class="col-md-5 col-md-offset-2" style="text-align:left;float:left;" >
             <section>
             
-            <h2 class="text-white" color=white;> d  </h2>
+            <h4 class="text-white" color=white;> d  </h4>
             <hr />
             
             <div class="form-floating">
@@ -60,6 +60,11 @@
                 <span asp-validation-for="Input.AddressCity" class="text-danger"></span>
             </div>
             <div class="form-floating">
+                <input asp-for="Input.AddressState" class="form-control"  aria-required="true" />
+                <label asp-for="Input.AddressState"></label>
+                <span asp-validation-for="Input.AddressState" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
                 <input asp-for="Input.AddressZip" class="form-control"  aria-required="true" />
                 <label asp-for="Input.AddressZip"></label>
                 <span asp-validation-for="Input.AddressZip" class="text-danger"></span>
@@ -76,6 +81,11 @@
                 <input asp-for="Input.WorkCity" class="form-control"  aria-required="true" />
                 <label asp-for="Input.WorkCity"></label>
                 <span asp-validation-for="Input.WorkCity" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Input.WorkState" class="form-control"  aria-required="true" />
+                <label asp-for="Input.WorkState"></label>
+                <span asp-validation-for="Input.WorkState" class="text-danger"></span>
             </div>
             <div class="form-floating">
                 <input asp-for="Input.WorkZip" class="form-control"  aria-required="true" />

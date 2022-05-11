@@ -4,6 +4,7 @@ using MWayV2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MWayV2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220511163649_9")]
+    partial class _9
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -291,27 +293,6 @@ namespace MWayV2.Migrations
                     b.Property<string>("IdHolder")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MonthlyYearly")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("BudgetItemID");
-
-                    b.HasIndex("Id");
-
-                    b.ToTable("budgets", "dbo");
-                });
-
-            modelBuilder.Entity("MWayV2.Models.Revenue", b =>
-                {
-                    b.Property<int>("RevenueId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RevenueId"), 1L, 1);
-
-                    b.Property<string>("IdHolder")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<double?>("Income")
                         .HasColumnType("float");
 
@@ -321,9 +302,14 @@ namespace MWayV2.Migrations
                     b.Property<string>("IncomeName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("RevenueId");
+                    b.Property<string>("MonthlyYearly")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("revenue", "dbo");
+                    b.HasKey("BudgetItemID");
+
+                    b.HasIndex("Id");
+
+                    b.ToTable("budgets", "dbo");
                 });
 
             modelBuilder.Entity("MWayV2.Models.ToDo", b =>

@@ -108,12 +108,16 @@ namespace MWayV2.Areas.Identity.Pages.Account
             public string AddressStreet { get; set; }
             [Display(Name = "City")]
             public string AddressCity { get; set; }
+            [Display(Name = "State")]
+            public string AddressState { get; set; }
             [Display(Name = "Zip Code")]
             public string AddressZip { get; set; }
             [Display(Name = "Work Street Address")]
             public string WorkStreet { get; set; }
             [Display(Name = "Work City")]
             public string WorkCity { get; set; }
+            [Display(Name = "Work State")]
+            public string WorkState { get; set; }
             [Display(Name = "Work Zip Code")]
             public string WorkZip { get; set; }
             
@@ -144,9 +148,11 @@ namespace MWayV2.Areas.Identity.Pages.Account
                 user.LastName = Input.LastName;
                 user.AddressStreet = Input.AddressStreet;
                 user.AddressCity = Input.AddressCity;
+                user.AddressState = Input.AddressState;
                 user.AddressZip = Input.AddressZip;
                 user.WorkStreet = Input.WorkStreet;
                 user.WorkCity = Input.WorkCity;
+                user.WorkState = Input.WorkState;
                 user.WorkZip = Input.WorkZip;
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 

@@ -1,0 +1,93 @@
+﻿@model IEnumerable<MWayV2.Models.ToDo>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>  
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> 
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+    $("#btnSubmit").click(function(){
+        $.ajax({
+            type: "POST",
+            url: "/ToDoUser/AjaxToDo",
+            datatype: "json",
+            data: {a: $("#todoname").val(), b: $("#tododescrip").val()},
+            
+            success: function(response){
+                alert("Success:" + JSON.stringify(response))
+            },
+            error: function(response){
+                alert(response.responseText);
+            }
+        });
+    }); 
+});
+</script>
+
+<div id="PlaceHolderHere"></div>
+
+<form id="form">
+    <div class="container">
+        <h2>To Do</h2>
+        <table class="table" id="maintable">
+            <thead>
+                <tr>
+                    <th>To Do Task</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="data-contact-person">
+                    <td>
+                        <input type="text" id="todoname" class="form-control todoname0" />
+                    </td>
+                    <td>
+                        <input type="text" id="tododescrip" class="form-control tododescrip0" />
+                    </td>
+                    <td>
+                        <button type="button" id="btnSubmit" class="btn btn-primary btn-md pull-right btn-sm">Sumbit</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</form>
+
+<div id="PlaceHoderHere"></div>
+
+<table>
+    <thead>
+        <tr>
+            <th>@Html.DisplayName("To Do Item")</th>
+            <th>@Html.DisplayName("Description")</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.ToDoName)</td>
+                <td>@Html.DisplayFor(modelItem => item.ToDoDescription)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ToDoId">Edit</a> |
+                <td><button type="button" id="btnUpdate" class="btn btn-primary btn-sm">Update</button> </td>
+                <td><button type="button" id="btnDelete" class="deleteContact btn btn-danger btn-sm">Remove</button> </td>
+                </td>
+                @*<td><button type="button" id="editBtn" class="btn btn-primary btn-md pull-right btn-sm" data-toggle="ajax-modal"
+                    data-target="#editToDo" data-url="@Url.Action($"Edit/{item.ToDoId}")">Edit</button></td>*@
+                 
+            </tr>
+        }
+    </tbody>
+</table>
+
+

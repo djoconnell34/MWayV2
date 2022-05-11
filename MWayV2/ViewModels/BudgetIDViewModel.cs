@@ -8,5 +8,6 @@ namespace MWayV2.ViewModels
         public Budget Budget { get; set; }
         public string UserId { get; set; }
 
+
     }
 }

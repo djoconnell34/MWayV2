@@ -7,18 +7,56 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
-<figure class="highcharts-figure">
-    <div id="container"></div>
-    <p class="highcharts-description">
-        
-    </p>
-</figure>
+
 
 <head>
     <style>
-        p{ text-align:center; font-size: 25px;}
-    </style>
+    .chart {
+        height: 200px;
+    }
+
+    .spacer {
+        height: 20px;
+    }
+
+    p {text-align: left; font-size: 20px; initial-letter-align: }
+
+</style>
 </head>
+
+
+<div class="container-fluid">
+      <div class="row">
+
+        <div class="col-sm-3">
+        <div class="col-xs-12" style="height:50px;"></div>
+        <div class="col-xs-12" style="height:50px;"></div>
+
+        <p>Monthly Revenue:</p>
+        
+         <div class="row">
+            <div class="col-sm-6" >@Html.DisplayName("Total Income:")</div>
+            <div class="col-sm-6" >$@ViewBag.IncomeTotal</div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6" >@Html.DisplayName("Total Expenses:")</div>
+            <div class="col-sm-6" >$@ViewBag.ExpTotal</div>
+        </div>
+        <div class="col-xs-12" style="height:20px;">-------------</div>
+        <div class="row" >
+            <div class="col-sm-6" > <b>@Html.DisplayName("Revenue:") </b></div>
+            <div class="col-sm-6" > <b>$@ViewBag.RevTotal </b></div>
+        </div>
+
+        
+    </div>    
+
+
+    <div class="col-sm-9">
+        <figure class="highcharts-figure">
+            <div id="container"></div>
+            <p class="highcharts-description"> </p>
+        </figure>
 
 <script>
 
@@ -57,12 +95,12 @@ $(document).ready(function(){
         name: 'Brands',
         colorByPoint: true,
         data: [{
-            name: 'Income',
+            name: 'Expenses',
             y: data.revenue1,
             sliced: true,
             selected: true
         }, {
-            name: 'Expensives',
+            name: 'Revenue',
             y: data.cost1
         }]
     }]
@@ -71,10 +109,8 @@ $(document).ready(function(){
 });
 </script>
         
-        <p>Monthly Revenue:</p>
-        <p>@Html.DisplayName("Total Income: $")@ViewBag.IncomeTotal</p>   
-        <p>@Html.DisplayName("Total Expenses: $")@ViewBag.ExpTotal</p>
-        <p> @Html.DisplayName("Revenue: $")@ViewBag.RevTotal</p>
         
+        </div>
 
-               
+      </div>         
+</div>

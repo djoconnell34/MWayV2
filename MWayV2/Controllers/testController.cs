@@ -29,8 +29,6 @@ namespace MWayV2.Controllers
 
                 var cost = _context.budgets.Where(x => x.IdHolder == currentUserID).Sum(x => x.BudgetItemCost);
 
-
-
                 var incomeYear = _context.revenue.Where(x => x.IdHolder.Contains(currentUserID) && x.IncomeMonthlyYearly == "Yearly").Sum(x => x.Income);
                 incomeYear = incomeYear / 12;
                 var incomeMonth = _context.revenue.Where(x => x.IdHolder.Contains(currentUserID) && x.IncomeMonthlyYearly == "Monthly").Sum(x => x.Income);
@@ -41,16 +39,10 @@ namespace MWayV2.Controllers
                 var expMonth = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.MonthlyYearly == "Monthly").Sum(x => x.BudgetItemCost);
                 var expTotal = expYear + expMonth;
 
-                //percent2 obj2 = new percent2();
-                //obj2.revenue1 = (double)incomeTotal;
-                //obj2.cost1 = (double)expTotal;
-
                 var revTotal = incomeTotal - expTotal;
                 ViewBag.IncomeTotal = Math.Round((double)incomeTotal, 2);
                 ViewBag.ExpTotal = Math.Round((double)expTotal, 2);
                 ViewBag.RevTotal = Math.Round((double)revTotal, 2);
-
-
 
                 return View();
             }
@@ -77,9 +69,11 @@ namespace MWayV2.Controllers
             var expMonth = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.MonthlyYearly == "Monthly").Sum(x => x.BudgetItemCost);
             var expTotal = expYear + expMonth;
 
+            var total = incomeTotal - expTotal;
+
             percent2 obj2 = new percent2();
             obj2.revenue1 = (double)incomeTotal;
-            obj2.cost1 = (double)expTotal;
+            obj2.cost1 = (double)total;
 
             return Json(obj2);
         }

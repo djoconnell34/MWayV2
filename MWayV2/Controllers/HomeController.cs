@@ -24,27 +24,30 @@ namespace MWayV2.Controllers
             
             if (currentUser.Identity.Name != null)
             {
-
-
                 var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-                //GetData();
-                //ChartData();
-
-                //var budGroupCar = "Car";
-                //var dataCar = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupCar).Sum(x => x.BudgetItemCost);
+                var budGroupCar = "Car";
+                var dataCar = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupCar).Sum(x => x.BudgetItemCost);
 
 
-                //var budGroupHome = "Home";
-                //var dataHome = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupHome).Sum(x => x.BudgetItemCost);
+                var budGroupHome = "Home";
+                var dataHome = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupHome).Sum(x => x.BudgetItemCost);
 
 
-                //var budGroupElectronics = "Electronics";
-                //var dataElect = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupElectronics).Sum(x => x.BudgetItemCost);
+                var budGroupElectronics = "Electronics";
+                var dataElect = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupElectronics).Sum(x => x.BudgetItemCost);
 
 
-                //var budGroupOther = "Other";
-                //var dataOther = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupOther).Sum(x => x.BudgetItemCost);
+                var budGroupOther = "Other";
+                var dataOther = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupOther).Sum(x => x.BudgetItemCost);
+
+
+
+                ViewBag.dataCar1 = Math.Round((double)dataCar, 2);
+                ViewBag.dataHome1 = Math.Round((double)dataHome, 2);
+                ViewBag.dataElect1 = Math.Round((double)dataElect, 2);
+                ViewBag.dataOther1 = Math.Round((double)dataOther, 2);
+
 
                 return View();
             }

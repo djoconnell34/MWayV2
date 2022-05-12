@@ -10,18 +10,21 @@
 <figure class="highcharts-figure">
     <div id="container"></div>
     <p class="highcharts-description">
-        Pie charts are very popular for showing a compact overview of a
-        composition or comparison. While they can be harder to read than
-        column charts, they remain a popular choice for small datasets.
+        
     </p>
 </figure>
 
+<head>
+    <style>
+        p{ text-align:center; font-size: 25px;}
+    </style>
+</head>
 
 <script>
 
 $(document).ready(function(){
 
-    $.getJSON("ChartData", function(data){
+    $.getJSON("test/ChartData", function(data){
         Highcharts.chart('container', {
     chart: {
         plotBackgroundColor: null,
@@ -30,7 +33,7 @@ $(document).ready(function(){
         type: 'pie'
     },
     title: {
-        text: 'Browser market shares in January, 2018'
+        text: 'Income vs. Expenses'
     },
     tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -55,20 +58,23 @@ $(document).ready(function(){
         colorByPoint: true,
         data: [{
             name: 'Income',
-            y: data.revenue,
+            y: data.revenue1,
             sliced: true,
             selected: true
         }, {
             name: 'Expensives',
-            y: data.cost
+            y: data.cost1
         }]
     }]
 });
     });
 });
-
-
-
-
-
 </script>
+        
+        <p>Monthly Revenue:</p>
+        <p>@Html.DisplayName("Total Income: $")@ViewBag.IncomeTotal</p>   
+        <p>@Html.DisplayName("Total Expenses: $")@ViewBag.ExpTotal</p>
+        <p> @Html.DisplayName("Revenue: $")@ViewBag.RevTotal</p>
+        
+
+               

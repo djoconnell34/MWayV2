@@ -5,6 +5,7 @@ using MWayV2.Models;
 using System.Diagnostics;
 using System.Security.Claims;
 
+
 namespace MWayV2.Controllers
 {
     public class HomeController : Controller
@@ -27,20 +28,23 @@ namespace MWayV2.Controllers
 
                 var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-                var budGroupCar = "Car";
-                var dataCar = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupCar).Sum(x => x.BudgetItemCost);
+                //GetData();
+                //ChartData();
+
+                //var budGroupCar = "Car";
+                //var dataCar = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupCar).Sum(x => x.BudgetItemCost);
 
 
-                var budGroupHome = "Home";
-                var dataHome = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupHome).Sum(x => x.BudgetItemCost);
+                //var budGroupHome = "Home";
+                //var dataHome = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupHome).Sum(x => x.BudgetItemCost);
 
 
-                var budGroupElectronics = "Electronics";
-                var dataElect = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupElectronics).Sum(x => x.BudgetItemCost);
+                //var budGroupElectronics = "Electronics";
+                //var dataElect = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupElectronics).Sum(x => x.BudgetItemCost);
 
 
-                var budGroupOther = "Other";
-                var dataOther = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupOther).Sum(x => x.BudgetItemCost);
+                //var budGroupOther = "Other";
+                //var dataOther = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupOther).Sum(x => x.BudgetItemCost);
 
                 return View();
             }
@@ -48,8 +52,10 @@ namespace MWayV2.Controllers
             {
                 return Redirect("Identity/Account/Register");
             }
-            
+
         }
+
+
         public ActionResult GetData()
         {
             ClaimsPrincipal currentUser = this.User;
@@ -87,12 +93,30 @@ namespace MWayV2.Controllers
         }
 
 
+        public ActionResult ChartData()
+        {
+            ClaimsPrincipal currentUser = this.User;
+            var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            var rev = _context.revenue.Where(x => x.IdHolder == currentUserID).Sum(x => x.Income);
+
+            var cost = _context.budgets.Where(x => x.IdHolder == currentUserID).Sum(x => x.BudgetItemCost);
 
 
 
+            percent2 obj2 = new percent2();
+            obj2.revenue = (double)rev;
+            obj2.cost = (double)cost;
 
+            return Json(obj2);
+        }
+        public class percent2
+        {
+            public double revenue { get; set; }
+            public double cost { get; set; }
 
-        
+        }
+
 
 
     }

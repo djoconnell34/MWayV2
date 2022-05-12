@@ -113,6 +113,7 @@ namespace MWayV2.Controllers
                         throw;
                     }
                 }
+                TempData["success"] = "Category Updated Successfully";
                 return RedirectToAction(nameof(Index));
             }
             return View(toDo);
@@ -152,6 +153,7 @@ namespace MWayV2.Controllers
             }
             
             await _context.SaveChangesAsync();
+            TempData["success"] = "Category Deleted Successfully";
             return RedirectToAction(nameof(Index));
         }
 

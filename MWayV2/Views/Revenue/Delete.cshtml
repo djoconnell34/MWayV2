@@ -4,7 +4,7 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete Revenue Item</h1>
+<h1>Delete Income Item</h1>
 
 
 <div>
@@ -12,19 +12,19 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IncomeName)
+           @Html.DisplayName("Income Source")
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.IncomeName)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Income)
+           @Html.DisplayName("Income Amount")
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Income)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IncomeMonthlyYearly)
+            @Html.DisplayName("Payment Time")
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.IncomeMonthlyYearly)

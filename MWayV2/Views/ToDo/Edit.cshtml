@@ -4,9 +4,9 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>Edit To Do Item</h1>
 
-<h4>ToDo</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,12 +14,12 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ToDoId" />
             <div class="form-group">
-                <label asp-for="ToDoName" class="control-label"></label>
+               @Html.DisplayName("Task")
                 <input asp-for="ToDoName" class="form-control" />
                 <span asp-validation-for="ToDoName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ToDoDescription" class="control-label"></label>
+               @Html.DisplayName("Description")
                 <input asp-for="ToDoDescription" class="form-control" />
                 <span asp-validation-for="ToDoDescription" class="text-danger"></span>
             </div>

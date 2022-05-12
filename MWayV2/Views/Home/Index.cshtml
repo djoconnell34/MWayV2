@@ -2,22 +2,40 @@
     ViewData["Title"] = "Home Page";
 }
 
-<script src="~/js/exporting.js"></script>
+<head>
+    <script src="~/js/exporting.js"></script>
 <script src="~/js/highcharts.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<style>
+    .chart {
+        height: 200px;
+    }
+
+    .spacer {
+        height: 20px;
+    }
+
+    p {text-align: center;}
+
+</style>
+
+
+
+</head>
 
 
 <figure class="highcharts-figure">
     <div id="container"></div>
-    <p class="highcharts-description">
+    <p class="highcharts-description" text-align>
         Here You can see the break-down of Your Spending
     </p>
 </figure>
 
-<script>
+<div id="chart-A" class="chart">
+    <script>
 
         $(document).ready(function(){
 
@@ -75,3 +93,66 @@
     });
 
 </script>
+
+</div>
+
+<p></p>
+
+<div class="spacer"></div>
+
+
+
+<div id="chart-B" class="chart">
+    <script>
+
+$(document).ready(function(){
+
+    $.getJSON("Home/ChartData", function(data){
+        Highcharts.chart('container', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Browser market shares in January, 2018'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    accessibility: {
+        point: {
+            valueSuffix: '%'
+        }
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+            }
+        }
+    },
+    series: [{
+        name: 'Brands',
+        colorByPoint: true,
+        data: [{
+            name: 'Income',
+            y: data.revenue,
+            sliced: true,
+            selected: true
+        }, {
+            name: 'Expensives',
+            y: data.cost
+        }]
+    }]
+});
+    });
+});
+
+</script>
+
+</div>

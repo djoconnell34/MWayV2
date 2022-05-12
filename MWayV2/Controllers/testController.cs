@@ -17,10 +17,11 @@ namespace MWayV2.Controllers
 
         public async Task<ActionResult> Index()
         {
-            
-
             ClaimsPrincipal currentUser = this.User;
             var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+
+            
 
             if (currentUser.Identity.Name != null)
             {
@@ -28,9 +29,28 @@ namespace MWayV2.Controllers
 
                 var cost = _context.budgets.Where(x => x.IdHolder == currentUserID).Sum(x => x.BudgetItemCost);
 
-                percent2 obj2 = new percent2();
-                obj2.revenue = (double)rev;
-                obj2.cost = (double)cost;
+
+
+                var incomeYear = _context.revenue.Where(x => x.IdHolder.Contains(currentUserID) && x.IncomeMonthlyYearly == "Yearly").Sum(x => x.Income);
+                incomeYear = incomeYear / 12;
+                var incomeMonth = _context.revenue.Where(x => x.IdHolder.Contains(currentUserID) && x.IncomeMonthlyYearly == "Monthly").Sum(x => x.Income);
+                var incomeTotal = incomeYear + incomeMonth;
+
+                var expYear = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.MonthlyYearly == "Yearly").Sum(x => x.BudgetItemCost);
+                expYear = expYear / 12;
+                var expMonth = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.MonthlyYearly == "Monthly").Sum(x => x.BudgetItemCost);
+                var expTotal = expYear + expMonth;
+
+                //percent2 obj2 = new percent2();
+                //obj2.revenue1 = (double)incomeTotal;
+                //obj2.cost1 = (double)expTotal;
+
+                var revTotal = incomeTotal - expTotal;
+                ViewBag.IncomeTotal = Math.Round((double)incomeTotal, 2);
+                ViewBag.ExpTotal = Math.Round((double)expTotal, 2);
+                ViewBag.RevTotal = Math.Round((double)revTotal, 2);
+
+
 
                 return View();
             }
@@ -47,22 +67,26 @@ namespace MWayV2.Controllers
             ClaimsPrincipal currentUser = this.User;
             var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            var rev = _context.revenue.Where(x => x.IdHolder == currentUserID).Sum(x => x.Income);
+            var incomeYear = _context.revenue.Where(x => x.IdHolder.Contains(currentUserID) && x.IncomeMonthlyYearly == "Yearly").Sum(x => x.Income);
+            incomeYear = incomeYear / 12;
+            var incomeMonth = _context.revenue.Where(x => x.IdHolder.Contains(currentUserID) && x.IncomeMonthlyYearly == "Monthly").Sum(x => x.Income);
+            var incomeTotal = incomeYear + incomeMonth;
 
-            var cost = _context.budgets.Where(x => x.IdHolder == currentUserID).Sum(x => x.BudgetItemCost);
-
-
+            var expYear = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.MonthlyYearly == "Yearly").Sum(x => x.BudgetItemCost);
+            expYear = expYear / 12;
+            var expMonth = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.MonthlyYearly == "Monthly").Sum(x => x.BudgetItemCost);
+            var expTotal = expYear + expMonth;
 
             percent2 obj2 = new percent2();
-            obj2.revenue = (double)rev;
-            obj2.cost = (double)cost;
+            obj2.revenue1 = (double)incomeTotal;
+            obj2.cost1 = (double)expTotal;
 
             return Json(obj2);
         }
         public class percent2
         {
-            public double revenue { get; set; }
-            public double cost { get; set; }
+            public double revenue1 { get; set; }
+            public double cost1 { get; set; }
 
         }
     }

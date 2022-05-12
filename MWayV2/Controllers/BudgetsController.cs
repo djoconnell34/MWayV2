@@ -32,23 +32,6 @@ namespace MWayV2.Controllers
             return View(await _context.budgets.Where(x => x.IdHolder == currentUserID).ToListAsync());
         }
 
-        // GET: Budgets/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var budget = await _context.budgets
-                .FirstOrDefaultAsync(m => m.BudgetItemID == id);
-            if (budget == null)
-            {
-                return NotFound();
-            }
-
-            return View(budget);
-        }
 
         [HttpPost]
         public JsonResult AjaxBud(string a, string b, string c, string d, string e)
@@ -145,6 +128,7 @@ namespace MWayV2.Controllers
                         throw;
                     }
                 }
+                TempData["success"] = "Category Updated Successfully";
                 return RedirectToAction(nameof(Index));
             }
             return View(budget);
@@ -176,6 +160,7 @@ namespace MWayV2.Controllers
             var budget = await _context.budgets.FindAsync(id);
             _context.budgets.Remove(budget);
             await _context.SaveChangesAsync();
+            TempData["success"] = "Category Deleted Successfully";
             return RedirectToAction(nameof(Index));
         }
 

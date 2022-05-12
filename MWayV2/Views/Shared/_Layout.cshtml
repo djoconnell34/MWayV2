@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="~/MWayV2.styles.css" asp-append-version="true" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/common.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 
 
 </head>
@@ -26,11 +27,14 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Budgets" asp-action="Index">Budgets</a>
+                         <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="test" asp-action="Index">Revenue</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Revenue" asp-action="Index">Revenue</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Budgets" asp-action="Index">Expenses</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Revenue" asp-action="Index">Income</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="ToDo" asp-action="Index">To Do</a>

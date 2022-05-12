@@ -3,11 +3,27 @@
 @{
     ViewData["Title"] = "Index";
 }
+    @if(TempData["success"] != null)
+{
+  
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     
+    <script type="text/javascript">
+        toastr.success('@TempData["success"]')
+    </script>
+}
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>  
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
+<head>
+    <style>
+        tr{text-align: center;}
+        td{text-align: center;}
+    </style>
+</head>
 
 
     <script type="text/javascript">
@@ -19,15 +35,17 @@
             datatype: "json",
             data: {a: $("#todoname").val(), b: $("#tododescrip").val()},
             
-            success: function(response){
-                alert("Success")
-            },
-            error: function(response){
-                alert(response.responseText);
+            success: function (xml) {
+                setInterval('refreshPage()', 50);
             }
+
         });
     }); 
 });
+
+function refreshPage() {
+    location.reload(true);
+}
 </script>
 
 <div id="PlaceHolderHere"></div>

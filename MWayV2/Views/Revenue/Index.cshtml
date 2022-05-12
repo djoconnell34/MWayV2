@@ -8,6 +8,8 @@
     <style>
         tr{text-align: center;}
         td{text-align: center;}
+        input:placeholder-shown {
+         font-style: italic;
     </style>
 </head>
 
@@ -69,13 +71,13 @@ function refreshPage() {
             <tbody>
                 <tr class="data-contact-person">
                     <td>
-                        <input type="text" id="IncomeName" class="form-control budgetGroup0" />
+                        <input type="text" id="IncomeName" class="form-control budgetGroup0" placeholder="Main Job, Side Hustle"/>
                     </td>
                     <td>
-                        <input type="text" id="Income" class="form-control BudgetItem0" />
+                        <input type="text" id="Income" class="form-control BudgetItem0" placeholder="3000"/>
                     </td>
                     <td>
-                        <input type="text" id="IncomeMonthlyYearly" class="form-control ItemCost0" />
+                        <input type="text" id="IncomeMonthlyYearly" class="form-control ItemCost0" placeholder="Monthly, Yearly"/>
                     </td>
                     <td>
                         <button type="button" id="btnSubmit" class="btn btn-primary btn-md pull-right btn-sm">Sumbit</button>

@@ -9,6 +9,6 @@ namespace MWayV2.Models
         public string ToDoName { get; set; } = "";
         public string? ToDoDescription { get; set; }
         public bool ToDoIsComplete { get; set; } = false;
-
+        public string IdHolder { get; set; }
     }
 }

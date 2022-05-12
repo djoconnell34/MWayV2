@@ -73,7 +73,7 @@ namespace MWayV2.Controllers
 
             percent2 obj2 = new percent2();
             obj2.revenue1 = (double)incomeTotal;
-            obj2.cost1 = (double)total;
+            obj2.cost1 = (double)expTotal;
 
             return Json(obj2);
         }

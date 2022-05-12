@@ -37,16 +37,16 @@
         
          <div class="row" >
             <div class="col-sm-6" style="font-size: 20px">@Html.DisplayName("Total Income:")</div>
-            <div class="col-sm-6" style="font-size: 20px">$ @ViewBag.IncomeTotal</div>
+            <div class="col-sm-6" style="font-size: 20px"> @ViewBag.IncomeTotal.ToString("C2")</div>
         </div>
         <div class="row">
             <div class="col-sm-6" style="font-size: 20px">@Html.DisplayName("Total Expenses:")</div>
-            <div class="col-sm-6" style="font-size: 20px">$ @ViewBag.ExpTotal</div>
+            <div class="col-sm-6" style="font-size: 20px"> @ViewBag.ExpTotal.ToString("C2")</div>
         </div>
         <div class="col-xs-12" style="height:20px;">-------------</div>
         <div class="row" >
             <div class="col-sm-6" style="font-size: 20px"> <b>@Html.DisplayName("Revenue:") </b></div>
-            <div class="col-sm-6" style="font-size: 20px"> <b>$ @ViewBag.RevTotal </b></div>
+            <div class="col-sm-6" style="font-size: 20px"> <b> @ViewBag.RevTotal.ToString("C2") </b></div>
         </div>
 
         
@@ -96,12 +96,12 @@ $(document).ready(function(){
         name: 'Brands',
         colorByPoint: true,
         data: [{
-            name: 'Expenses',
+            name: 'Revenue',
             y: data.revenue1,
             sliced: true,
             selected: true
         }, {
-            name: 'Revenue',
+            name: 'Expenses',
             y: data.cost1
         }]
     }]

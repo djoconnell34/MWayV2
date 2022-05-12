@@ -40,19 +40,19 @@
         
          <div class="row">
             <div class="col-sm-7" style="font-size: 20px">@Html.DisplayName("Car Payments:")</div>
-            <div class="col-sm-5" style="font-size: 20px">$ @ViewBag.dataCar1</div>
+            <div class="col-sm-5" style="font-size: 20px">@ViewBag.dataCar1.ToString("C2")</div>
         </div>
         <div class="row">
             <div class="col-sm-7" style="font-size: 20px">@Html.DisplayName("Home Payments:")</div>
-            <div class="col-sm-5" style="font-size: 20px">$ @ViewBag.dataHome1</div>
+            <div class="col-sm-5" style="font-size: 20px">@ViewBag.dataHome1.ToString("C2")</div>
         </div>
         <div class="row">
             <div class="col-sm-7" style="font-size: 20px">@Html.DisplayName("Electronics:")</div>
-            <div class="col-sm-5" style="font-size: 20px">$ @ViewBag.dataElect1</div>
+            <div class="col-sm-5" style="font-size: 20px">@ViewBag.dataElect1.ToString("C2")</div>
         </div>
         <div class="row">
             <div class="col-sm-7" style="font-size: 20px">@Html.DisplayName("Other Expenses:")</div>
-            <div class="col-sm-5" style="font-size: 20px">$ @ViewBag.dataOther1</div>
+            <div class="col-sm-5" style="font-size: 20px">@ViewBag.dataOther1.ToString("C2")</div>
         </div>
         
     </div>    

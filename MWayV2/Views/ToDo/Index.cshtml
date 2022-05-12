@@ -22,6 +22,9 @@
     <style>
         tr{text-align: center;}
         td{text-align: center;}
+        input:placeholder-shown {
+         font-style: italic;
+}
     </style>
 </head>
 
@@ -31,7 +34,7 @@
     $("#btnSubmit").click(function(){
         $.ajax({
             type: "POST",
-            url: "/ToDoUser/AjaxToDo",
+            url: "/ToDo/AjaxToDo",
             datatype: "json",
             data: {a: $("#todoname").val(), b: $("#tododescrip").val()},
             
@@ -64,10 +67,10 @@ function refreshPage() {
             <tbody>
                 <tr class="data-contact-person">
                     <td>
-                        <input type="text" id="todoname" class="form-control todoname0" />
+                        <input type="text" id="todoname" class="form-control todoname0" placeholder="Shopping List" />
                     </td>
                     <td>
-                        <input type="text" id="tododescrip" class="form-control tododescrip0" />
+                        <input type="text" id="tododescrip" class="form-control tododescrip0" placeholder="Chicken, Peas, Carrots"/>
                     </td>
                     <td>
                         <button type="button" id="btnSubmit" class="btn btn-primary btn-md pull-right btn-sm">Sumbit</button>
@@ -85,7 +88,7 @@ function refreshPage() {
             <th>
                  @Html.DisplayName("Task")
             </th>
-            <th>
+            <th style="text-align: left; padding-left: 125px;">
                  @Html.DisplayName("Description")
             </th>
             <th></th>
@@ -97,10 +100,10 @@ function refreshPage() {
             <td>
                 @Html.DisplayFor(modelItem => item.ToDoName)
             </td>
-            <td>
+            <td style="text-align: left; padding-left: 150px;">
                 @Html.DisplayFor(modelItem => item.ToDoDescription)
             </td>
-            <td>
+            <td >
                 <a asp-action="Edit" asp-route-id="@item.ToDoId" class="btn btn-primary btn-md pull-right btn-sm">Edit</a> |
                 
                 <a asp-action="Delete" asp-route-id="@item.ToDoId" class="deleteContact btn btn-danger btn-sm">Delete</a>

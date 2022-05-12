@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using MWayV2.Data;
 using MWayV2.Models;
 using System.Data;
+using System.Security.Claims;
 
 namespace MWayV2.Controllers
 {
@@ -26,15 +27,19 @@ namespace MWayV2.Controllers
         [HttpPost]
         public JsonResult AjaxToDo(string a, string b)
         {
+            ClaimsPrincipal currentUser = this.User;
+            var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+
             ToDo todoInput = new ToDo
             {
                 ToDoName = a,
                 ToDoDescription = b,
-                ToDoIsComplete = false
+                ToDoIsComplete = false,
+                IdHolder = currentUserID
             };
 
             conn.Open();
-            SqlCommand cmd = new SqlCommand("insert into todo (ToDoName, ToDoDescription, ToDoIsComplete) values ('" + todoInput.ToDoName + "', '" + todoInput.ToDoDescription + "', '" + todoInput.ToDoIsComplete + "')", conn);
+            SqlCommand cmd = new SqlCommand("insert into todo (ToDoName, ToDoDescription, ToDoIsComplete, IdHolder) values ('" + todoInput.ToDoName + "', '" + todoInput.ToDoDescription + "', '" + todoInput.ToDoIsComplete + "', '" + todoInput.IdHolder + "')", conn);
             cmd.ExecuteNonQuery();
             conn.Close();
             return Json(todoInput);

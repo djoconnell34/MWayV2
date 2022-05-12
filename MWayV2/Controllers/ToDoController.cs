@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using MWayV2.Data;
 using MWayV2.Models;
@@ -12,6 +14,7 @@ namespace MWayV2.Controllers
 {
     public class ToDoController : Controller
     {
+        SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=zMWayV2;Integrated Security=True");
         private readonly ApplicationDbContext _context;
 
         public ToDoController(ApplicationDbContext context)
@@ -19,12 +22,35 @@ namespace MWayV2.Controllers
             _context = context;
         }
 
+
+        [HttpPost]
+        public JsonResult AjaxToDo(string a, string b, string c, string d)
+        {
+            ClaimsPrincipal currentUser = this.User;
+            var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            ToDo Input = new ToDo
+            {
+                ToDoName = a,
+                ToDoDescription = b,
+                ToDoIsComplete = false,
+                IdHolder = currentUserID
+            };
+
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("insert into todo (ToDoName, ToDoDescription, ToDoIsComplete, IdHolder) values ('" + Input.ToDoName + "', '" + Input.ToDoDescription + "', '" + Input.ToDoIsComplete + "', '" + Input.IdHolder + "')", conn);
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            return Json(Input);
+        }
+
         // GET: ToDo
         public async Task<IActionResult> Index()
         {
-              return _context.todo != null ? 
-                          View(await _context.todo.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.todo'  is null.");
+            ClaimsPrincipal currentUser = this.User;
+            var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            return View(await _context.todo.Where(x => x.IdHolder == currentUserID).ToListAsync());
         }
 
         // GET: ToDo/Details/5
@@ -88,7 +114,7 @@ namespace MWayV2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ToDoId,ToDoName,ToDoDescription,ToDoIsComplete")] ToDo toDo)
+        public async Task<IActionResult> Edit(int id, [Bind("ToDoId,ToDoName,ToDoDescription,ToDoIsComplete, IdHolder")] ToDo toDo)
         {
             if (id != toDo.ToDoId)
             {

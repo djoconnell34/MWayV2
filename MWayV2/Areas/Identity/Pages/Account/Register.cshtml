@@ -8,22 +8,24 @@
 
 
 <div class="row">
-    <div  style="text-align:left;float:left;">
+    <div  style="text-align:left;float:left; ">
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <div class="col-md-5" style="text-align:left;float:left;" >
-               <h4 class="text-white" color=white;> d  </h4>
+
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-floating">
+            <div class="form-floating " >
                 <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
                 <label asp-for="Input.Email"></label>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
+            <div class="col-xs-12" style="height:8px;"></div>
             <div class="form-floating">
                 <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
                 <label asp-for="Input.Password"></label>
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
+            <div class="col-xs-12" style="height:8px;"></div>
             <div class="form-floating">
                 <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
                 <label asp-for="Input.ConfirmPassword"></label>
@@ -33,10 +35,9 @@
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
             </div>
 
-            <div class="col-md-5 col-md-offset-2" style="text-align:left;float:left;" >
+            <div class="col-md-5 col-md-offset-2" style="text-align:left;float:left; padding-left: 15px" >
             <section>
             
-            <h4 class="text-white" color=white;> d  </h4>
             <hr />
             
             <div class="form-floating">
@@ -44,26 +45,31 @@
                 <label asp-for="Input.FirstName"></label>
                 <span asp-validation-for="Input.FirstName" class="text-danger"></span>
             </div>
+            <div class="col-xs-12" style="height:8px;"></div>
             <div class="form-floating">
                 <input asp-for="Input.LastName" class="form-control"  aria-required="true" />
                 <label asp-for="Input.LastName"></label>
                 <span asp-validation-for="Input.LastName" class="text-danger"></span>
             </div>
+            <div class="col-xs-12" style="height:8px;"></div>
             <div class="form-floating">
                 <input asp-for="Input.AddressStreet" class="form-control"  aria-required="true" />
                 <label asp-for="Input.AddressStreet"></label>
                 <span asp-validation-for="Input.AddressStreet" class="text-danger"></span>
             </div>
+            <div class="col-xs-12" style="height:8px;"></div>
             <div class="form-floating">
                 <input asp-for="Input.AddressCity" class="form-control"  aria-required="true" />
                 <label asp-for="Input.AddressCity"></label>
                 <span asp-validation-for="Input.AddressCity" class="text-danger"></span>
             </div>
+            <div class="col-xs-12" style="height:8px;"></div>
             <div class="form-floating">
                 <input asp-for="Input.AddressState" class="form-control"  aria-required="true" />
                 <label asp-for="Input.AddressState"></label>
                 <span asp-validation-for="Input.AddressState" class="text-danger"></span>
             </div>
+            <div class="col-xs-12" style="height:8px;"></div>
             <div class="form-floating">
                 <input asp-for="Input.AddressZip" class="form-control"  aria-required="true" />
                 <label asp-for="Input.AddressZip"></label>
@@ -77,16 +83,19 @@
                 <label asp-for="Input.WorkStreet"></label>
                 <span asp-validation-for="Input.WorkStreet" class="text-danger"></span>
             </div>
+            <div class="col-xs-12" style="height:8px;"></div>
             <div class="form-floating">
                 <input asp-for="Input.WorkCity" class="form-control"  aria-required="true" />
                 <label asp-for="Input.WorkCity"></label>
                 <span asp-validation-for="Input.WorkCity" class="text-danger"></span>
             </div>
+            <div class="col-xs-12" style="height:8px;"></div>
             <div class="form-floating">
                 <input asp-for="Input.WorkState" class="form-control"  aria-required="true" />
                 <label asp-for="Input.WorkState"></label>
                 <span asp-validation-for="Input.WorkState" class="text-danger"></span>
             </div>
+            <div class="col-xs-12" style="height:8px;"></div>
             <div class="form-floating">
                 <input asp-for="Input.WorkZip" class="form-control"  aria-required="true" />
                 <label asp-for="Input.WorkZip"></label>

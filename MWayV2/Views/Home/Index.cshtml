@@ -11,7 +11,8 @@
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
 
-<style>
+<head>
+    <style>
     .chart {
         height: 200px;
     }
@@ -20,9 +21,9 @@
         height: 20px;
     }
 
-    p {text-align: left; font-size: 25px;}
-    
+    p {text-align: left; font-size: 25px; }
 
+    chartData {font-size: 15px;}
 </style>
 </head>
 
@@ -34,16 +35,16 @@
 
    <div class="col-sm-3">
         <div class="col-xs-12" style="height:50px;"></div>
-        <div class="col-xs-12" style="height:50px;"></div>
 
-        <p><b>Monthly Expenses:</b></p>
+
+        <p>Monthly Expense Forecast</p>
         
          <div class="row">
-            <div class="col-sm-7" style="font-size: 20px">@Html.DisplayName("Car Payments:")</div>
+            <div class="col-sm-7" style="font-size: 20px">@Html.DisplayName("Car Expenses:")</div>
             <div class="col-sm-5" style="font-size: 20px">@ViewBag.dataCar1.ToString("C2")</div>
         </div>
         <div class="row">
-            <div class="col-sm-7" style="font-size: 20px">@Html.DisplayName("Home Payments:")</div>
+            <div class="col-sm-7" style="font-size: 20px">@Html.DisplayName("Home Expenses:")</div>
             <div class="col-sm-5" style="font-size: 20px">@ViewBag.dataHome1.ToString("C2")</div>
         </div>
         <div class="row">
@@ -53,6 +54,11 @@
         <div class="row">
             <div class="col-sm-7" style="font-size: 20px">@Html.DisplayName("Other Expenses:")</div>
             <div class="col-sm-5" style="font-size: 20px">@ViewBag.dataOther1.ToString("C2")</div>
+        </div>
+        <div class="col-xs-12" style="height:20px;">-------------</div>
+        <div class="row">
+            <div class="col-sm-7" style="font-size: 20px"> <b>@Html.DisplayName("Total Expenses:")</b></div>
+            <div class="col-sm-5" style="font-size: 20px"><b>@ViewBag.total.ToString("C2")</b></div>
         </div>
         
     </div>    

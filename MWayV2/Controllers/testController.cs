@@ -39,6 +39,8 @@ namespace MWayV2.Controllers
                 var expMonth = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.MonthlyYearly == "Monthly").Sum(x => x.BudgetItemCost);
                 var expTotal = expYear + expMonth;
 
+
+
                 var revTotal = incomeTotal - expTotal;
                 ViewBag.IncomeTotal = Math.Round((double)incomeTotal, 2);
                 ViewBag.ExpTotal = Math.Round((double)expTotal, 2);
@@ -72,7 +74,7 @@ namespace MWayV2.Controllers
             var total = incomeTotal - expTotal;
 
             percent2 obj2 = new percent2();
-            obj2.revenue1 = (double)incomeTotal;
+            obj2.revenue1 = (double)total;
             obj2.cost1 = (double)expTotal;
 
             return Json(obj2);

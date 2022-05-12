@@ -28,26 +28,27 @@ namespace MWayV2.Controllers
 
                 var budGroupCar = "Car";
                 var dataCar = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupCar).Sum(x => x.BudgetItemCost);
-
+                var dataCarDiv = dataCar / 12;
 
                 var budGroupHome = "Home";
                 var dataHome = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupHome).Sum(x => x.BudgetItemCost);
-
+                var dataHomeDiv = dataHome / 12;
 
                 var budGroupElectronics = "Electronics";
                 var dataElect = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupElectronics).Sum(x => x.BudgetItemCost);
-
+                var dataElectDiv = dataElect / 12;
 
                 var budGroupOther = "Other";
                 var dataOther = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupOther).Sum(x => x.BudgetItemCost);
+                var dataOtherDiv = dataOther / 12;
 
+                var total = dataCarDiv + dataHomeDiv + dataElectDiv + dataOtherDiv;
 
-
-                ViewBag.dataCar1 = Math.Round((double)dataCar, 2);
-                ViewBag.dataHome1 = Math.Round((double)dataHome, 2);
-                ViewBag.dataElect1 = Math.Round((double)dataElect, 2);
-                ViewBag.dataOther1 = Math.Round((double)dataOther, 2);
-
+                ViewBag.dataCar1 = Math.Round((double)dataCarDiv, 2);
+                ViewBag.dataHome1 = Math.Round((double)dataHomeDiv, 2);
+                ViewBag.dataElect1 = Math.Round((double)dataElectDiv, 2);
+                ViewBag.dataOther1 = Math.Round((double)dataOtherDiv, 2);
+                ViewBag.total = Math.Round((double)total, 2);
 
                 return View();
             }

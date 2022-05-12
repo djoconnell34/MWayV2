@@ -14,6 +14,8 @@ namespace MWayV2.Models
         public string? BudgetGroup { get; set; }
         [Required]
         public string? BudgetItemName { get; set; }
+        [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         [Required]
         public double? BudgetItemCost { get; set; }
         

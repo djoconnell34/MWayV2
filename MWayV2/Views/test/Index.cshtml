@@ -19,7 +19,7 @@
         height: 20px;
     }
 
-    p {text-align: left; font-size: 25px; initial-letter-align: }
+    p {text-align: left; font-size: 25px; }
 
     chartData {font-size: 15px;}
 </style>
@@ -33,20 +33,20 @@
         <div class="col-xs-12" style="height:50px;"></div>
         <div class="col-xs-12" style="height:50px;"></div>
 
-        <p>Monthly Revenue:</p>
+        <p>Monthly Revenue Forecast:</p>
         
          <div class="row" >
-            <div class="col-sm-6" style="font-size: 20px">@Html.DisplayName("Total Income:")</div>
-            <div class="col-sm-6" style="font-size: 20px"> @ViewBag.IncomeTotal.ToString("C2")</div>
+            <div class="col-sm-7" style="font-size: 20px">@Html.DisplayName("Total Income:")</div>
+            <div class="col-sm-5" style="font-size: 20px"> @ViewBag.IncomeTotal.ToString("C2")</div>
         </div>
         <div class="row">
-            <div class="col-sm-6" style="font-size: 20px">@Html.DisplayName("Total Expenses:")</div>
-            <div class="col-sm-6" style="font-size: 20px"> @ViewBag.ExpTotal.ToString("C2")</div>
+            <div class="col-sm-7" style="font-size: 20px">@Html.DisplayName("Total Expenses:")</div>
+            <div class="col-sm-5" style="font-size: 20px"> @ViewBag.ExpTotal.ToString("C2")</div>
         </div>
         <div class="col-xs-12" style="height:20px;">-------------</div>
         <div class="row" >
-            <div class="col-sm-6" style="font-size: 20px"> <b>@Html.DisplayName("Revenue:") </b></div>
-            <div class="col-sm-6" style="font-size: 20px"> <b> @ViewBag.RevTotal.ToString("C2") </b></div>
+            <div class="col-sm-7" style="font-size: 20px"> <b>@Html.DisplayName("Revenue:") </b></div>
+            <div class="col-sm-5" style="font-size: 20px"> <b> @ViewBag.RevTotal.ToString("C2") </b></div>
         </div>
 
         

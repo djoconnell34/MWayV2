@@ -26,28 +26,43 @@ namespace MWayV2.Controllers
             {
                 var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
 
+
+                var incomeYear = _context.revenue.Where(x => x.IdHolder.Contains(currentUserID) && x.IncomeMonthlyYearly == "Yearly").Sum(x => x.Income);
+                incomeYear = incomeYear / 12;
+                var incomeMonth = _context.revenue.Where(x => x.IdHolder.Contains(currentUserID) && x.IncomeMonthlyYearly == "Monthly").Sum(x => x.Income);
+                var incomeTotal = incomeYear + incomeMonth;
+
                 var budGroupCar = "Car";
-                var dataCar = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupCar).Sum(x => x.BudgetItemCost);
-                var dataCarDiv = dataCar / 12;
+                var dataCarYear = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupCar && x.MonthlyYearly == "Yearly").Sum(x => x.BudgetItemCost);
+                dataCarYear = dataCarYear / 12;
+                var dataCar = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupCar && x.MonthlyYearly == "Monthly").Sum(x => x.BudgetItemCost);
+                var dataCarTotal = dataCarYear + dataCar;
 
                 var budGroupHome = "Home";
-                var dataHome = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupHome).Sum(x => x.BudgetItemCost);
-                var dataHomeDiv = dataHome / 12;
+                var dataHomeYear = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupHome && x.MonthlyYearly == "Yearly").Sum(x => x.BudgetItemCost);
+                dataHomeYear = dataHomeYear / 12;
+                var dataHome = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupHome && x.MonthlyYearly == "Monthly").Sum(x => x.BudgetItemCost);
+                var dataHomeTotal = dataHomeYear + dataHome;
 
                 var budGroupElectronics = "Electronics";
-                var dataElect = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupElectronics).Sum(x => x.BudgetItemCost);
-                var dataElectDiv = dataElect / 12;
+                var dataElectYear = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupElectronics && x.MonthlyYearly == "Yearly").Sum(x => x.BudgetItemCost);
+                dataElectYear = dataElectYear / 12;
+                var dataElect = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupElectronics && x.MonthlyYearly == "Monthly").Sum(x => x.BudgetItemCost);
+                var dataElectTotal = dataElectYear + dataElect;
 
                 var budGroupOther = "Other";
-                var dataOther = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupOther).Sum(x => x.BudgetItemCost);
-                var dataOtherDiv = dataOther / 12;
+                var dataOtherYear = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupOther && x.MonthlyYearly == "Yearly").Sum(x => x.BudgetItemCost);
+                dataOtherYear = dataOtherYear / 12;
+                var dataOther = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupOther && x.MonthlyYearly == "Monthly").Sum(x => x.BudgetItemCost);
+                var dataOtherTotal = dataOtherYear + dataOther;
 
-                var total = dataCarDiv + dataHomeDiv + dataElectDiv + dataOtherDiv;
 
-                ViewBag.dataCar1 = Math.Round((double)dataCarDiv, 2);
-                ViewBag.dataHome1 = Math.Round((double)dataHomeDiv, 2);
-                ViewBag.dataElect1 = Math.Round((double)dataElectDiv, 2);
-                ViewBag.dataOther1 = Math.Round((double)dataOtherDiv, 2);
+                var total = dataCarTotal + dataHomeTotal + dataElectTotal + dataOtherTotal;
+
+                ViewBag.dataCar1 = Math.Round((double)dataCarTotal, 2);
+                ViewBag.dataHome1 = Math.Round((double)dataHomeTotal, 2);
+                ViewBag.dataElect1 = Math.Round((double)dataElectTotal, 2);
+                ViewBag.dataOther1 = Math.Round((double)dataOtherTotal, 2);
                 ViewBag.total = Math.Round((double)total, 2);
 
                 return View();
@@ -80,11 +95,46 @@ namespace MWayV2.Controllers
             var budGroupOther = "Other";
             var dataOther = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupOther).Sum(x => x.BudgetItemCost);
 
+
+
+
+            var incomeYear = _context.revenue.Where(x => x.IdHolder.Contains(currentUserID) && x.IncomeMonthlyYearly == "Yearly").Sum(x => x.Income);
+            incomeYear = incomeYear / 12;
+            var incomeMonth = _context.revenue.Where(x => x.IdHolder.Contains(currentUserID) && x.IncomeMonthlyYearly == "Monthly").Sum(x => x.Income);
+            var incomeTotal = incomeYear + incomeMonth;
+
+    
+            var dataCarYear = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupCar && x.MonthlyYearly == "Yearly").Sum(x => x.BudgetItemCost);
+            dataCarYear = dataCarYear / 12;
+            var dataCar1 = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupCar && x.MonthlyYearly == "Monthly").Sum(x => x.BudgetItemCost);
+            var dataCarTotal = dataCarYear + dataCar1;
+
+            var dataHomeYear = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupHome && x.MonthlyYearly == "Yearly").Sum(x => x.BudgetItemCost);
+            dataHomeYear = dataHomeYear / 12;
+            var dataHome1 = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupHome && x.MonthlyYearly == "Monthly").Sum(x => x.BudgetItemCost);
+            var dataHomeTotal = dataHomeYear + dataHome1;
+
+            var dataElectYear = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupElectronics && x.MonthlyYearly == "Yearly").Sum(x => x.BudgetItemCost);
+            dataElectYear = dataElectYear / 12;
+            var dataElect = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupElectronics && x.MonthlyYearly == "Monthly").Sum(x => x.BudgetItemCost);
+            var dataElectTotal = dataElectYear + dataElect;
+
+       
+            var dataOtherYear = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupOther && x.MonthlyYearly == "Yearly").Sum(x => x.BudgetItemCost);
+            dataOtherYear = dataOtherYear / 12;
+            var dataOther1 = _context.budgets.Where(x => x.IdHolder.Contains(currentUserID) && x.BudgetGroup == budGroupOther && x.MonthlyYearly == "Monthly").Sum(x => x.BudgetItemCost);
+            var dataOtherTotal = dataOtherYear + dataOther1;
+
+
+            var total = dataCarTotal + dataHomeTotal + dataElectTotal + dataOtherTotal;
+
+
+
             percent obj = new percent();
-            obj.car = (double)dataCar;
-            obj.home = (double)dataHome;
-            obj.electron = (double)dataElectron;
-            obj.other = (double)dataOther;
+            obj.car = (double)dataCarTotal;
+            obj.home = (double)dataHomeTotal;
+            obj.electron = (double)dataElectTotal;
+            obj.other = (double)dataOtherTotal;
 
             return Json(obj);
         }

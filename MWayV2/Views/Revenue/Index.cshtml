@@ -80,6 +80,19 @@ function refreshPage() {
                         <input type="text" id="IncomeMonthlyYearly" class="form-control ItemCost0" placeholder="Monthly, Yearly"/>
                     </td>
                     <td>
+                        <form action="/action_page.php">
+                          <select id="IncomeMonthlyYearly" class="form-control ItemCost0" placeholder="Monthly, Yearly">
+                            <optgroup label= "Monthly, Yearly">
+                              <option value="Monthly">Monthly</option>
+                              <option value="Yearly">Yearly</option>
+                            </optgroup>
+                          </select>
+                        </form>
+                    </td>
+                    
+                    
+
+                    <td>
                         <button type="button" id="btnSubmit" class="btn btn-primary btn-md pull-right btn-sm">Sumbit</button>
                     </td>
                 </tr>
